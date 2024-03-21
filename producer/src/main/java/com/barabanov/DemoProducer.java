@@ -11,7 +11,8 @@ public class DemoProducer
 {
     public static final String TOPIC_NAME = "MyTopic";
 
-    public static void main(String[] args) {
+    public static void main(String[] args)
+    {
         var kafkaProducer = new MyKafkaProducer("localhost:9092");
 
         var kafkaDataSender = new KafkaDataSender(TOPIC_NAME, new ObjectMapper(), kafkaProducer);

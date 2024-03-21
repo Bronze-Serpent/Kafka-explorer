@@ -35,7 +35,7 @@ public class KafkaDataReceiver
                 try {
                     var key = mapper.readValue(kafkaRecord.key(), Long.class);
                     var value = mapper.readValue(kafkaRecord.value(), StringValue.class);
-                    log.info("Read message from kafka. Key:{}, value:{}, record:{}", key, value, kafkaRecord);
+                    log.info("Read message from kafka. Key:{}, value_id: {}, value:{}, record:{}", key, value.id(), value, kafkaRecord);
                 } catch (JacksonException ex) {
                     log.error("can't parse record:{}", kafkaRecord, ex);
                 }
