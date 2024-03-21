@@ -17,6 +17,7 @@ import org.apache.kafka.clients.producer.RecordMetadata;
 @Slf4j
 public class KafkaDataSender
 {
+    public final String topicName;
     private final ObjectMapper mapper;
     private final MyKafkaProducer kafkaProducer;
 
@@ -27,14 +28,11 @@ public class KafkaDataSender
             String valueAsStr = mapper.writeValueAsString(value);
 
             kafkaProducer.getProducer()
-                    .send(new ProducerRecord<>(Long.toString(value.id()), valueAsStr), new Callback() {
-                        @Override
-                        public void onCompletion(RecordMetadata metadata, Exception exception) {
-                            if (exception != null)
-                                log.error("message wasn't sent", exception);
-                            else
-                                log.info("message id:{} was sent, offset:{}", value.id(), metadata.offset());
-                        }
+                    .send(new ProducerRecord<>(topicName, Long.toString(value.id()), valueAsStr), (metadata, exception) -> {
+                        if (exception != null)
+                            log.error("message wasn't sent", exception);
+                        else
+                            log.info("message id:{} was sent, offset:{}", value.id(), metadata.offset());
                     });
         } catch (JsonProcessingException e)
         {

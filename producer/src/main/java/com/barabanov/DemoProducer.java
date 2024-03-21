@@ -9,11 +9,12 @@ import org.slf4j.LoggerFactory;
 @Slf4j
 public class DemoProducer
 {
+    public static final String TOPIC_NAME = "MyTopic";
 
     public static void main(String[] args) {
         var kafkaProducer = new MyKafkaProducer("localhost:9092");
 
-        var kafkaDataSender = new KafkaDataSender(new ObjectMapper(), kafkaProducer);
+        var kafkaDataSender = new KafkaDataSender(TOPIC_NAME, new ObjectMapper(), kafkaProducer);
 
         var valueSource = new StringValueSource(kafkaDataSender::send);
         valueSource.generate();

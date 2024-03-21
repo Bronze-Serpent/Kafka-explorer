@@ -16,14 +16,14 @@ public class MyKafkaProducer
 {
     private final KafkaProducer<String, String> kafkaProducer;
 
-    public static final String TOPIC_NAME = "MyTopic";
-
-
     public MyKafkaProducer(String bootstrapServers)
     {
         Properties props = new Properties();
         props.put(CLIENT_ID_CONFIG, "myKafkaProducer");
-        props.put(BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
+        props.put(BOOTSTRAP_SERVERS_CONFIG, bootstrapServers); //список серверов, к которым клиент Kafka должен подключиться для инициализации связи с кластером Kafka.
+        // Этот параметр указывает на один или несколько брокеров Kafka, которые будут использоваться клиентом для обнаружения и установления соединения с кластером.
+        // При запуске клиента Kafka, он использует сервера из bootstrap.servers для инициализации соединения с кластером.
+        // Затем клиент получает дополнительную информацию о топиках и брокерах в кластере
         props.put(ACKS_CONFIG, "1"); // Когда считается выполненным запрос. Когда все реплики сохранили копии или когда только какое-то число.
 //        Без параметров не будет подтверждения вообще. -1 - когда все реплики сохранят
 //        (В данном примере всего 1 брокер и 1 партиция так что это и неважно)
