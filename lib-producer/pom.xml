@@ -12,7 +12,7 @@
     </parent>
 
 
-    <artifactId>kafka-starter-lib-producer</artifactId>
+    <artifactId>lib-producer</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 

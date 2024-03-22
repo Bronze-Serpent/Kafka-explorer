@@ -10,7 +10,7 @@
     </parent>
 
 
-    <artifactId>spring-boot-version</artifactId>
+    <artifactId>spring-cloud-version</artifactId>
     <version>1.0-SNAPSHOT</version>
 
 
@@ -55,11 +55,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.kafka</groupId>-->
-<!--            <artifactId>spring-kafka-test</artifactId>-->
-<!--            <scope>test</scope>-->
-<!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.kafka</groupId>-->
+        <!--            <artifactId>spring-kafka-test</artifactId>-->
+        <!--            <scope>test</scope>-->
+        <!--        </dependency>-->
 
 
         <dependency>

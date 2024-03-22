@@ -13,5 +13,9 @@
 
 
     <modules>
+        <module>lib-consumer</module>
+        <module>lib-producer</module>
+        <module>spring-boot-version</module>
+        <module>spring-cloud-version</module>
     </modules>
 </project>
