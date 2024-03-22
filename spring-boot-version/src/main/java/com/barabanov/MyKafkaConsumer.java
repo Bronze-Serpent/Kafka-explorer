@@ -12,10 +12,10 @@ public class MyKafkaConsumer
 {
 
     @KafkaListener(topics = "${kafka.topic.name}", groupId = "${kafka.groupId}")
-    public void LadaConsumer(ConsumerRecord<String, Cart> consumerRecord)
+    public void LadaConsumer(ConsumerRecord<String, Lada> consumerRecord)
     {
         log.info("Received record: {}", consumerRecord);
-        Cart value = consumerRecord.value();
+        Lada value = consumerRecord.value();
         log.info("Lada here: {}", value);
     }
 }
