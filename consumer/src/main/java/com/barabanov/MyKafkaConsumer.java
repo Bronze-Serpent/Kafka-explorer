@@ -38,7 +38,7 @@ public class MyKafkaConsumer
         props.put(AUTO_OFFSET_RESET_CONFIG, "earliest"); // Устанавливает первоначальный дефолтный оффсет, если такой не задан по умолчанию.
         // earliest- значит начнём читать с начала топика. latest - начнём читать  с последнего сообщения в топике
         props.put(KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
-        props.put(VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.ByteArraySerializer");
 
         kafkaConsumer = new KafkaConsumer<>(props);
         kafkaConsumer.subscribe(List.of(TOPIC_NAME));
