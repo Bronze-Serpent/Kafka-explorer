@@ -1,0 +1,13 @@
+spring:
+  cloud:
+    function:
+      definition: ladaSupplier;ladaConsumer
+    stream:
+      bindings:
+        ladaSupplier-out-0:
+          destination: cloudTopic
+        ladaConsumer-in-0:
+          destination: cloudTopic
+
+      kafka:
+        binder.brokers: localhost:9092
