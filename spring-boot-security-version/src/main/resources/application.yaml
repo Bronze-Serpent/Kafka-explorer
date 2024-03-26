@@ -1,0 +1,19 @@
+kafka:
+  topic.name: spring-boot-security-topic
+  groupId: springBootConsumer
+
+spring:
+  kafka:
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json:
+          trusted.packages: com.barabanov
+      auto-offset-reset: earliest
+      enable-auto-commit: true
+      auto-commit-interval: 100

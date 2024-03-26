@@ -14,7 +14,6 @@ import java.util.function.Supplier;
 public class CloudKafkaConfig
 {
 
-    // TODO: 22.03.2024 А в какие моменты и зачем вызывается этот supplier
     @Bean
     public Supplier<Lada> ladaSupplier()
     {
@@ -25,11 +24,18 @@ public class CloudKafkaConfig
             return lada;
         };
     }
+//    todo как обработать ошибки, возникающие при отправке в кафку через Supplier.
 
 
     @Bean
     public Consumer<Lada> ladaConsumer()
     {
-        return lada-> log.info("Consuming Lada:{}", lada);
+        return lada->
+        {
+            //dead letter queue можно настроить в spring cloud. Туда автоматически падают письма, при обработке которых возникла ошибка
+//            throw new RuntimeException("Я кинул ошибку " + lada.uuid());
+
+            log.info("Вот моя лада:{}", lada);
+        };
     }
 }

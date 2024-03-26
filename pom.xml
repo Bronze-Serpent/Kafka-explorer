@@ -17,5 +17,6 @@
         <module>lib-producer</module>
         <module>spring-boot-version</module>
         <module>spring-cloud-version</module>
+        <module>spring-boot-security-version</module>
     </modules>
 </project>

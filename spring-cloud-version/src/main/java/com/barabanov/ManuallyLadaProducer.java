@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @Slf4j
 @RequiredArgsConstructor
-@Component
+//@Component
 public class ManuallyLadaProducer
 {
     private final StreamBridge streamBridge;
