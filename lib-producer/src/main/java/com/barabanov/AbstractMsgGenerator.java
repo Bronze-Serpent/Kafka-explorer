@@ -14,13 +14,14 @@ public abstract class AbstractMsgGenerator<T> {
 
 
     public void generate() {
-        ScheduledExecutorService executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(
-                () -> this.msgConsumer.accept(createVal()),
-                0,
-                5,
-                TimeUnit.SECONDS
-        );
+        try (ScheduledExecutorService executor = Executors.newScheduledThreadPool(1)) {
+            executor.scheduleAtFixedRate(
+                    () -> this.msgConsumer.accept(createVal()),
+                    0,
+                    5,
+                    TimeUnit.SECONDS
+            );
+        }
     }
 
     protected abstract T createVal();

@@ -27,16 +27,15 @@ public class KafkaSender {
             try {
                 String valueAsStr = objectMapper.writeValueAsString(value);
 
-                kafkaProducer
-                        .send(new ProducerRecord<>(topicName, key, valueAsStr), (metadata, exception) -> {
+                kafkaProducer.send(new ProducerRecord<>(topicName, key, valueAsStr), (metadata, exception) -> {
                             if (exception != null)
-                                log.error("message wasn't sent", exception);
+                                log.error("Сообщение не отправлено!", exception);
                             else
-                                log.info("message with key:{} was sent, offset:{}", key, metadata.offset());
+                                log.info("Сообщение с key:{} было отправлено, offset:{}", key, metadata.offset());
                         });
             } catch (JsonProcessingException e)
             {
-                log.error("error during parsing message", e);
+                log.error("Ошибка при преобразовании сообщения", e);
                 throw new RuntimeException(e);
             }
         }

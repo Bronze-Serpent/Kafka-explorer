@@ -12,7 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.stream.LongStream;
-import java.util.stream.Stream;
 
 import static com.barabanov.KafkaSender.SIMPLE_MSG_TOPIC_NAME;
 import static org.apache.kafka.clients.CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG;
@@ -21,12 +20,10 @@ import static org.apache.kafka.clients.consumer.ConsumerConfig.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-class ManualSerializationTest extends KafkaBase
-{
+class ManualSerializationTest extends KafkaBase {
 
     @Test
-    void shouldWriteAndReadStringsFromKafka()
-    {
+    void shouldWriteAndReadStringsFromKafka() {
         ObjectMapper objectMapper = new ObjectMapper();
         KafkaProducer<String, String> kafkaProducer = KafkaProducerFactory.buildKafkaProducer(this.getBootstrapServers());
         KafkaSender kafkaDataSender = new KafkaSender(objectMapper, kafkaProducer);
@@ -40,15 +37,13 @@ class ManualSerializationTest extends KafkaBase
         List<SimpleMsg> receivedObjects = new LinkedList<>();
 
         // создаём consumer-a, который вытащит все значения
-        try(KafkaConsumer<String, String> consumer = createConsumer(this.getBootstrapServers()))
-        {
+        try (KafkaConsumer<String, String> consumer = createConsumer(this.getBootstrapServers())) {
             consumer.poll(Duration.ofMillis(1000))
                     .records(SIMPLE_MSG_TOPIC_NAME)
                     .iterator()
                     .forEachRemaining((kafkaRecord) ->
                     {
-                        try
-                        {
+                        try {
                             SimpleMsg readObject = objectMapper.readValue(kafkaRecord.value(), SimpleMsg.class);
                             receivedObjects.add(readObject);
                         } catch (JsonProcessingException e) {
@@ -61,8 +56,7 @@ class ManualSerializationTest extends KafkaBase
     }
 
 
-    private KafkaConsumer<String, String> createConsumer(String bootstrapServers)
-    {
+    private KafkaConsumer<String, String> createConsumer(String bootstrapServers) {
         Properties props = new Properties();
 
         props.put(BOOTSTRAP_SERVERS_CONFIG, bootstrapServers);
