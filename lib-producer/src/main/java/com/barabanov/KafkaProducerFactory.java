@@ -1,5 +1,7 @@
 package com.barabanov;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 
@@ -12,12 +14,14 @@ import static org.apache.kafka.common.security.oauthbearer.OAuthBearerLoginCallb
 
 
 @Slf4j
-public class MyKafkaProducer
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+public class KafkaProducerFactory
 {
-    private final KafkaProducer<String, String> kafkaProducer;
 
-    public MyKafkaProducer(String bootstrapServers)
-    {
+    /**
+     * Да, такие настройки лучше вынести в конфиг. файлы, но для тестового проекта нет смысла заморачиваться
+     */
+    public static KafkaProducer<String, String> buildKafkaProducer(String bootstrapServers) {
         Properties props = new Properties();
         props.put(CLIENT_ID_CONFIG, "myKafkaProducer");
         props.put(BOOTSTRAP_SERVERS_CONFIG, bootstrapServers); //список серверов, к которым клиент Kafka должен подключиться для инициализации связи с кластером Kafka.
@@ -36,7 +40,7 @@ public class MyKafkaProducer
         props.put(KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer"); // сериализация для ключа
         props.put(VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer"); // сериализация для сообщения
 
-        kafkaProducer = new KafkaProducer<>(props);
+        KafkaProducer<String, String> kafkaProducer = new KafkaProducer<>(props);
 
         // добавляем новый обработчик завершения работы виртуальной машины, чтобы закрыть ресурсы
         var shutdownHook = new Thread(() -> {
@@ -44,11 +48,7 @@ public class MyKafkaProducer
             kafkaProducer.close();
         });
         Runtime.getRuntime().addShutdownHook(shutdownHook);
-    }
 
-
-    public KafkaProducer<String, String> getProducer()
-    {
         return kafkaProducer;
     }
 }

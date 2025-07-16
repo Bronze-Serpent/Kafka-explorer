@@ -16,6 +16,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static com.barabanov.KafkaSender.SIMPLE_MSG_TOPIC_NAME;
 import static org.apache.kafka.clients.CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG;
 
 
@@ -24,7 +25,6 @@ import static org.apache.kafka.clients.CommonClientConfigs.BOOTSTRAP_SERVERS_CON
 abstract class KafkaBase
 {
     private final static KafkaContainer kafkaContainer = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:7.0.0"));
-    public static final String TOPIC_NAME = "MyTestTopic";
 
     @Getter
     private String bootstrapServers;
@@ -33,7 +33,7 @@ abstract class KafkaBase
     @BeforeAll
     public void init() throws ExecutionException, InterruptedException, TimeoutException
     {
-        start(List.of(new NewTopic(TOPIC_NAME, 1, (short) 1)));
+        start(List.of(new NewTopic(SIMPLE_MSG_TOPIC_NAME, 1, (short) 1)));
     }
 
 
