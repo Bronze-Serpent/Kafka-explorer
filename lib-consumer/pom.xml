@@ -6,7 +6,7 @@
 
     <parent>
         <groupId>com.barabanov</groupId>
-        <artifactId>kafka-starter</artifactId>
+        <artifactId>kafka-explorer</artifactId>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../</relativePath>
     </parent>
