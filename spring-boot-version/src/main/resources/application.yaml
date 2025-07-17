@@ -12,6 +12,7 @@ spring:
       properties:
         max.poll.records: 20
         spring.json.trusted.packages: com.barabanov
+#        spring.json.add.type.headers: false Если нужно отключить добавление информации о типе в заголовок
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
 
