@@ -12,8 +12,12 @@
     <packaging>pom</packaging>
 
 
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+    </properties>
+
     <modules>
-        <module>lib-consumer</module>
-        <module>lib-producer</module>
+        <module>spring-boot-version</module>
     </modules>
 </project>
