@@ -1,0 +1,22 @@
+# На деле остаётся много моментов, этот проект для spring kafka cloud скорее как самый ранний MVP т.к. нужно ещё задавть часть важных настроек для kafka,
+# Нужно продумать обработку ошибок, нужно вспомнить принцип работы spring cloud и понять почему producer вызывается постоянно и т.д.
+
+spring:
+  cloud:
+    function:
+      definition: simpleMsgSupplier;simpleMsgConsumer
+    stream:
+      bindings:
+        simpleMsgSupplier-out-0:
+          destination: SIMPLE_MSG_TOPIC
+        simpleMsgConsumer-in-0:
+          destination: SIMPLE_MSG_TOPIC
+          group: springCloudAppGroupId
+
+      kafka:
+        binder:
+          brokers: localhost:9092
+          configuration:
+            auto-offset-reset: earliest
+          consumerProperties:
+            max.poll.records: 20
