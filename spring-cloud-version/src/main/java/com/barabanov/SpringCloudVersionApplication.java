@@ -7,10 +7,10 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @EnableScheduling
 @SpringBootApplication
-public class SpringBootVersionApplication {
+public class SpringCloudVersionApplication {
 
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootVersionApplication.class, args);
+        SpringApplication.run(SpringCloudVersionApplication.class, args);
     }
 }
